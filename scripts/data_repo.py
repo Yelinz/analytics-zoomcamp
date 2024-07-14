@@ -99,7 +99,7 @@ JAPAN_STOCKS = [
     "8035.T",
     "6098.T",
     "SMFG",
-    "8058.T"
+    "8058.T",
 ]
 # largest market cap gain
 CAP_GAIN_STOCKS = [
@@ -118,7 +118,9 @@ class DataRepository:
 
     min_date: str
     # remove all duplicates
-    ALL_TICKERS: list[str] = list(set(US_STOCKS + EU_STOCKS + JAPAN_STOCKS + CAP_GAIN_STOCKS))
+    ALL_TICKERS: list[str] = list(
+        set(US_STOCKS + EU_STOCKS + JAPAN_STOCKS + CAP_GAIN_STOCKS)
+    )
 
     def __init__(self):
         self.ticker_df = None

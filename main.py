@@ -69,9 +69,12 @@ def main(fetch, transform, train):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(prog='Stock Analysis', description='Download, transform, train and infere on stock data')
-    parser.add_argument('--fetch', action='store_true', help='Fetch data from APIs')
-    parser.add_argument('--transform', action='store_true', help='Transform data')
-    parser.add_argument('--train', action='store_true', help='Train the model')
+    parser = argparse.ArgumentParser(
+        prog="Stock Analysis",
+        description="Download, transform, train and infere on stock data",
+    )
+    parser.add_argument("--fetch", action="store_true", help="Fetch data from APIs")
+    parser.add_argument("--transform", action="store_true", help="Transform data")
+    parser.add_argument("--train", action="store_true", help="Train the model")
     args = parser.parse_args()
     main(args.fetch, args.transform, args.train)

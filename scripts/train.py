@@ -9,6 +9,7 @@ from scripts.transform import TransformData
 # ML models and utils
 # from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+
 # from sklearn.metrics import accuracy_score
 # from sklearn.metrics import precision_score
 
@@ -312,7 +313,9 @@ class TrainModel:
 
     def train_random_forest(self, max_depth=17, n_estimators=200):
         # https://scikit-learn.org/stable/modules/ensemble.html#random-forests-and-other-randomized-tree-ensembles
-        print("Training the best model (RandomForest (max_depth=17, n_estimators=200))")
+        print(
+            f"Training the best model (RandomForest (max_depth={max_depth}, n_estimators={n_estimators}))"
+        )
         self.model = RandomForestClassifier(
             n_estimators=n_estimators, max_depth=max_depth, random_state=42, n_jobs=-1
         )
@@ -341,17 +344,7 @@ class TrainModel:
         # https://scikit-learn.org/stable/modules/ensemble.html#random-forests-and-other-randomized-tree-ensembles
         print("Making inference")
 
-        y_pred_all = np.array([]).reshape(0, 2)
-        # split into chunks to avoid memory issues
-        chunk_size = int(self.X_all.shape[0] / 4)
-        for start in range(0, self.X_all.shape[0], chunk_size):
-            y_subset = self.X_all.iloc[start:start + chunk_size]
-            print("before", start)
-            y_pred = self.model.predict_proba(y_subset)
-            y_pred_all = np.concatenate((y_pred, y_pred_all))
-            print(start)
-
-        breakpoint()
+        y_pred_all = self.model.predict_proba(self.X_all)
         y_pred_all_class1 = [
             k[1] for k in y_pred_all
         ]  # list of predictions for class "1"
